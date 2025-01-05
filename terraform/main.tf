@@ -9,7 +9,7 @@ resource "google_container_cluster" "primary" {
   initial_node_count = 3
 
   workload_identity_config {
-    workload_pool = "${var.project_id}.svc.id.goog"
+    workload_pool = "${var.project_id}.svc.id.goog"  # Ensure this reflects your project ID correctly
   }
 
   node_config {

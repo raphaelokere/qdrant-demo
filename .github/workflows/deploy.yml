@@ -22,7 +22,7 @@ jobs:
         run: |
          echo "Project ID is: ${{ secrets.GCP_PROJECT_ID }}"
         env:
-          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # Set environment variable for direct check
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Terraform Init
         run: terraform init

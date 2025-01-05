@@ -18,6 +18,12 @@ jobs:
         with:
           terraform_version: 1.0.0
 
+      - name: Display Project ID (Debug)
+        run: |
+         echo "Project ID is: ${{ secrets.GCP_PROJECT_ID }}"
+        env:
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # Set environment variable for direct check
+
       - name: Terraform Init
         run: terraform init
         working-directory: terraform
@@ -25,16 +31,3 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve -var project_id=${{ secrets.GCP_PROJECT_ID }}
         working-directory: terraform
-          
-      - name: Set up Kubernetes config
-        run: |
-          gcloud container clusters get-credentials qdrant-cluster --zone us-east --project ${{ secrets.GCP_PROJECT_ID }}
-
-      - name: Install Helm
-        run: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
-      - name: Deploy Qdrant Operator
-        run: |
-          helm repo add qdrant https://registry.cloud.qdrant.io
-          helm repo update
-          helm install qdrant qdrant/qdrant-operator

@@ -20,9 +20,11 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
+        working-directory: terraform
 
       - name: Terraform Apply
         run: terraform apply -auto-approve -var project_id=${{ secrets.GCP_PROJECT_ID }}
+        working-directory: terraform
           
       - name: Set up Kubernetes config
         run: |

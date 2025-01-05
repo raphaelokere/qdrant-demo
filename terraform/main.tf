@@ -1,12 +1,11 @@
 provider "google" {
-  credentials = file("<path-to-your-service-account-key>.json")
-  project     = "<your-gcp-project-id>"
-  region      = "<your-region>"
+  project = var.project_id
+  region      = "us-east"
 }
 
 resource "google_container_cluster" "primary" {
   name               = "qdrant-cluster"
-  location           = "<your-zone>"
+  location           = "us-east"
   initial_node_count = 3
 
   node_config {
